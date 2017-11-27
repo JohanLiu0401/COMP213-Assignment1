@@ -1,42 +1,47 @@
-import java.util.LinkedList;
+import java.util.*;
 
 /**
- * 
- */
-
-/**
- * @author liuzhiyong
+ * public HumanPlayer class extends the public abstract Player class. It is used by public Round class.
+ * It implements the selectedAttribute(Card card) method in the public Player class.
+ *
+ * @author Zhiyong Liu
  *
  */
 public class HumanPlayer extends Player {
 
-	private LinkedList<Card> deck = new LinkedList<Card>();
-	
-	/* (non-Javadoc)
-	 * @see Player#pick()
+	/**
+	 * Constructs a human player.
 	 */
-	@Override
-	Card pick() {
-		// TODO Auto-generated method stub
-		return null;
+	HumanPlayer(String name){
+		this.name = "Human player " + name;
 	}
 
-	/* (non-Javadoc)
-	 * @see Player#put()
+	/**
+	 * Human player select one attribute of picked card.
+	 *
+	 * @param card the card which is picked
+	 * @return the attribute selected by player
 	 */
 	@Override
-	void put() {
-		// TODO Auto-generated method stub
-		
-	}
+	Attribute selectAttribute(Card card) {
+		Attribute selectedAttribute = null;
+		System.out.println("Please input the name of attribute which you want to choose(ignore case):");
+		Scanner kb = new Scanner(System.in);
+		boolean isMatch = false;
+		while(!isMatch){
+			String input = kb.nextLine();
+			for(Attribute attribute: card.getAttributes()){
+				if(attribute.getName().equalsIgnoreCase(input)){
+					selectedAttribute = attribute;
+					isMatch = true;
+				}
+			}
 
-	/* (non-Javadoc)
-	 * @see Player#selectAttribute()
-	 */
-	@Override
-	Attribute selectAttribute() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+			if(isMatch == false){
+				System.out.println("Attribute not exist! Please enter again:");
+			}
+		}
 
+		return selectedAttribute;
+	}
 }

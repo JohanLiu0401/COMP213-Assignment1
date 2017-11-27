@@ -1,38 +1,40 @@
-/**
- * 
- */
+
+import java.util.*;
 
 /**
+ * public RandomComputerPlayer class extends the public abstract Player class. It is used by public Round class.
+ * It implements the selectedAttribute(Card card) method in the public Player class.
+ *
  * @author liuzhiyong
  *
  */
-public class RandomComputerPlayer extends ComputerPlayer {
+public class RandomComputerPlayer extends Player {
 
-	/* (non-Javadoc)
-	 * @see Player#pick()
+	/**
+	 * The value increases when a random computer player is instanced. It is used to set the name of random computer player.
 	 */
-	@Override
-	Card pick() {
-		// TODO Auto-generated method stub
-		return null;
+	private static int sequence = 1;
+
+	/**
+	 * Constructs a random computer.
+	 */
+	RandomComputerPlayer(){
+		this.name = "Random computer player "+sequence;
+		sequence++;
 	}
 
-	/* (non-Javadoc)
-	 * @see Player#put()
+	/**
+	 * Random computer player select one attribute of picked card.
+	 *
+	 * @param card the card which is picked by random computer player
+	 * @return the attribute which is selected by random computer player
 	 */
 	@Override
-	void put() {
-		// TODO Auto-generated method stub
-		
+	Attribute selectAttribute(Card card) {
+		GameFunction.gameWait(5000);
+		Random random = new Random();
+		int selectedAttributeSequence = random.nextInt(card.getAttributes().size());
+		Attribute selectedAttribute = card.getAttributes().get(selectedAttributeSequence);
+		return selectedAttribute;
 	}
-
-	/* (non-Javadoc)
-	 * @see Player#selectAttribute()
-	 */
-	@Override
-	Attribute selectAttribute() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
